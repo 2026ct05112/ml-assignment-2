@@ -88,6 +88,9 @@ Repository contains:
 
 ### Graph Representation
 
+#### Summary Metrics Table — All 5 Models × 6 Metrics
+![Summary Table](results/summary_table.png)
+
 #### Model Comparison — All 6 Metrics
 ![Model Comparison](results/model_comparison.png)
 
