@@ -1,6 +1,6 @@
 # ML Assignment 2 — Classification Models on Telco Customer Churn Dataset
 
-**Student:** Maada | BITS ID: 2026CT05112  
+**Student:** Amal Kottoor | BITS ID: 2026CT05112  
 **Course:** Machine Learning | BITS Pilani WILP M.Tech (AIML) 2024–26  
 **Submission Date:** 27 November 2026  
 **Dataset:** [Telco Customer Churn — IBM Watson Analytics](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
@@ -158,7 +158,7 @@ A horizontal bar chart ranking all 19 features by their importance score from th
 | **Logistic Regression** | Best overall performer — highest Accuracy (0.7991) and AUC (0.8403). Strong probabilistic discrimination. Lower Recall (0.5481) means it misses ~45% of actual churners — a concern where catching churners early is the priority. Recommended as the default production model. |
 | **Decision Tree** | Weakest performer overall — lowest AUC (0.6625) and MCC (0.3202). Without depth limiting, the tree overfits training data. Its discrimination ability is significantly lower than ensemble and linear models. Useful for interpretability but not for accuracy. |
 | **kNN** | Mid-range across all metrics. Recall (0.5027) is lowest among all models. Performance is constrained by high dimensionality (19 features) — with k=5, it struggles to generalize in high-dimensional space (curse of dimensionality). |
-| **Naive Bayes** | Surprisingly good AUC (0.8204) despite the naive independence assumption. Standout Recall (0.7326) — catches 73% of actual churners, highest among all models. Low Precision (0.5141) means higher false alarms. Best choice if business priority is flagging maximum potential churners. |
+| **Naive Bayes** | Surprisingly good AUC (0.8204) despite the naive independence assumption. Standout Recall (0.7326) — catches 73% of actual churners, highest among all models. Low Precision (0.5141) means higher false alarms. Best choice if business priority is flagging maximum potential churners (flag-many-investigate-later strategy). |
 | **Random Forest** | Well-balanced and second-strongest model — Accuracy (0.7921) and AUC (0.8225) close to Logistic Regression. Top features: TotalCharges, MonthlyCharges, tenure. Ensemble voting reduces the overfitting seen in the single Decision Tree. |
 
 ### Overall Winner
@@ -182,19 +182,23 @@ A horizontal bar chart ranking all 19 features by their importance score from th
 
 ```
 ml-assignment-2/
+│
 ├── model/
-│   ├── ml_classification.ipynb      # Main notebook — all 5 models, preprocessing, graphs
 │   ├── logistic_regression.joblib   # Saved Logistic Regression model
 │   ├── decision_tree.joblib         # Saved Decision Tree model
 │   ├── knn.joblib                   # Saved kNN model
 │   ├── gaussian_nb.joblib           # Saved Gaussian Naive Bayes model
 │   └── random_forest.joblib         # Saved Random Forest model
+│
 ├── results/
 │   ├── summary_table.png            # Colour-coded metrics table (all 5 models × 6 metrics)
 │   ├── model_comparison.png         # 6-panel bar chart comparison
 │   ├── confusion_matrices.png       # 5 confusion matrices in one figure
 │   ├── roc_curve.png                # ROC curves — all 5 models overlaid
 │   └── feature_importance.png       # Random Forest feature ranking
+│
+├── ml_classification.ipynb          # Main notebook — all 5 models, preprocessing, graphs
+├── WA_Fn-UseC_-Telco-Customer-Churn.csv  # Full dataset (7,043 rows)
 ├── requirements.txt                 # Python dependencies
 ├── test_data.csv                    # 100-row test sample with actual Churn labels
 └── README.md                        # This file
@@ -206,13 +210,12 @@ ml-assignment-2/
 
 ### Option A — Google Colab (Recommended)
 
-1. Open `model/ml_classification.ipynb` in [Google Colab](https://colab.research.google.com/)
-2. Run Cell 1 — a **file upload dialog appears automatically**
-3. Select `WA_Fn-UseC_-Telco-Customer-Churn.csv` from your computer
-4. Run all remaining cells: **Runtime → Run all** (Ctrl+F9)
-5. All outputs, charts, and saved `.joblib` files are generated automatically
+1. Open `ml_classification.ipynb` in [Google Colab](https://colab.research.google.com/)
+2. Upload `WA_Fn-UseC_-Telco-Customer-Churn.csv` using the **Files panel** (folder icon on the left → Upload)
+3. Run all cells: **Runtime → Run all** (Ctrl+F9)
+4. All outputs, charts, and saved `.joblib` files are generated automatically
 
-> **No Google Drive mounting required.**
+> **No Google Drive mounting required.** The notebook detects the uploaded file automatically.
 
 ### Option B — Local Jupyter
 
@@ -220,16 +223,16 @@ ml-assignment-2/
    ```bash
    pip install pandas numpy scikit-learn matplotlib joblib notebook
    ```
-2. Place `WA_Fn-UseC_-Telco-Customer-Churn.csv` in the `model/` folder (same directory as the notebook)
+2. Place `WA_Fn-UseC_-Telco-Customer-Churn.csv` in the root folder (same directory as the notebook)
 3. Launch Jupyter:
    ```bash
-   jupyter notebook model/ml_classification.ipynb
+   jupyter notebook ml_classification.ipynb
    ```
 4. Run all cells: **Cell → Run All**
 
 ### Dataset Download
 
-Freely available on Kaggle:  
+The dataset is freely available on Kaggle:  
 https://www.kaggle.com/datasets/blastchar/telco-customer-churn  
 Filename: `WA_Fn-UseC_-Telco-Customer-Churn.csv`
 
@@ -245,6 +248,7 @@ matplotlib
 joblib
 ```
 
+Install all at once:
 ```bash
 pip install pandas numpy scikit-learn matplotlib joblib
 ```
